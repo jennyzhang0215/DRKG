@@ -1,1 +1,7 @@
 .idea
+*.tsv
+data/drkg/*
+data/embed/*
+.*
+*.tar.gz
+*.pyc
