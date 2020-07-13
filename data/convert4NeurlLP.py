@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--save_dir', dest='save_dir', type=str, default='../../Neural-LP/datasets',
+parser.add_argument('--save_dir', dest='save_dir', type=str, default='../../Neural-LP/datasets/drkg',
                     help='the directory name for saving the converted datasets')
 args = parser.parse_args()
 if not os.path.isdir(args.save_dir):
@@ -18,9 +18,9 @@ relation_map = pd.read_csv(relation_map_file, sep='\t', names=['name', 'id'])
 print('relation_map', relation_map)
 
 entity_name = entity_map['name'].to_csv(os.path.join(args.save_dir, 'entities.txt'),
-                                        sep='\t', header=False, index=False)
+                                        header=False, index=False)
 relation_name = relation_map['name'].to_csv(os.path.join(args.save_dir, 'relations.txt'),
-                                            sep='\t', header=False, index=False)
+                                            header=False, index=False)
 
 ### process kg triplets
 drkg_file = 'drkg.tsv'
@@ -31,8 +31,8 @@ print('#triplets: {}'.format(num_triples))
 
 seed = np.arange(num_triples)
 np.random.shuffle(seed)
-fact_cnt = int(num_triples * 0.8)
-train_cnt = int(num_triples * 0.1)
+fact_cnt = int(num_triples * 0.6)
+train_cnt = int(num_triples * 0.3)
 valid_cnt = int(num_triples * 0.05)
 fact_set = seed[ : fact_cnt].tolist()
 train_set = seed[fact_cnt : fact_cnt + train_cnt].tolist()
