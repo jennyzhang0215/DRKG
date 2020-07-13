@@ -4,9 +4,11 @@ import pandas as pd
 import numpy as np
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--save_dir', dest='save_dir',type='str',
+parser.add_argument('--save_dir', dest='save_dir', type=str, default='../../Neural-LP/datasets',
                     help='the directory name for saving the converted datasets')
 args = parser.parse_args()
+if not os.path.isdir(args.save_dir):
+    os.makedirs(args.save_dir)
 
 entity_map_file = os.path.join('embed', 'entities.tsv')
 relation_map_file = os.path.join('embed', 'relations.tsv')
