@@ -17,10 +17,14 @@ print('entity_map', entity_map)
 relation_map = pd.read_csv(relation_map_file, sep='\t', names=['name', 'id'])
 print('relation_map', relation_map)
 
-entity_name = entity_map['name'].to_csv(os.path.join(args.save_dir, 'entities.txt'),
-                                        header=False, index=False)
-relation_name = relation_map['name'].to_csv(os.path.join(args.save_dir, 'relations.txt'),
-                                            header=False, index=False)
+with open(os.path.join(args.save_dir, "entities.txt"), 'w+') as f:
+    for name in entity_map['name']:
+        f.writelines("{}\n".format(name.replace(' ', '-')))
+print("Saved entity file!")
+with open(os.path.join(args.save_dir, "relations.txt"), 'w+') as f:
+    for name in relation_map['name']:
+        f.writelines("{}\n".format(name.replace(' ', '-')))
+print("Saved relation file!")
 
 ### process kg triplets
 drkg_file = 'drkg.tsv'
@@ -42,15 +46,19 @@ test_set = seed[fact_cnt + train_cnt + valid_cnt : ].tolist()
 with open(os.path.join(args.save_dir, "facts.txt"), 'w+') as f:
     for idx in fact_set:
         f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+print("Saved fact file!")
 
 with open(os.path.join(args.save_dir, "train.txt"), 'w+') as f:
     for idx in train_set:
         f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+print("Saved train file!")
 
 with open(os.path.join(args.save_dir, "valid.txt"), 'w+') as f:
     for idx in valid_set:
         f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+print("Saved valid file!")
 
 with open(os.path.join(args.save_dir, "test.txt"), 'w+') as f:
     for idx in test_set:
         f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+print("Saved test file!")
