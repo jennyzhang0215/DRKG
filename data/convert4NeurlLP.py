@@ -45,20 +45,28 @@ test_set = seed[fact_cnt + train_cnt + valid_cnt : ].tolist()
 
 with open(os.path.join(args.save_dir, "facts.txt"), 'w+') as f:
     for idx in fact_set:
-        f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+        f.writelines("{}\t{}\t{}\n".format(triples[idx][0].replace(' ', '-'),
+                                           triples[idx][1].replace(' ', '-'),
+                                           triples[idx][2].replace(' ', '-')))
 print("Saved fact file!")
 
 with open(os.path.join(args.save_dir, "train.txt"), 'w+') as f:
     for idx in train_set:
-        f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+        f.writelines("{}\t{}\t{}\n".format(triples[idx][0].replace(' ', '-'),
+                                           triples[idx][1].replace(' ', '-'),
+                                           triples[idx][2].replace(' ', '-')))
 print("Saved train file!")
 
 with open(os.path.join(args.save_dir, "valid.txt"), 'w+') as f:
     for idx in valid_set:
-        f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+        f.writelines("{}\t{}\t{}\n".format(triples[idx][0].replace(' ', '-'),
+                                           triples[idx][1].replace(' ', '-'),
+                                           triples[idx][2].replace(' ', '-')))
 print("Saved valid file!")
 
 with open(os.path.join(args.save_dir, "test.txt"), 'w+') as f:
     for idx in test_set:
-        f.writelines("{}\t{}\t{}\n".format(triples[idx][0], triples[idx][1], triples[idx][2]))
+        f.writelines("{}\t{}\t{}\n".format(triples[idx][0].replace(' ', '-'),
+                                           triples[idx][1].replace(' ', '-'),
+                                           triples[idx][2].replace(' ', '-')))
 print("Saved test file!")
